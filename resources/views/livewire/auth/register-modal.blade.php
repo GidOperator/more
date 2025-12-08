@@ -35,12 +35,20 @@
                     <!-- Регистрация -->
                     @if ($mode === 'input')
                         <form wire:submit.prevent="startRegister" class="d-flex flex-column gap-3">
-                            <select wire:model.defer="role" class="form-select">
-                                <option value="">Выберите роль</option>
-                                @foreach (\App\Models\Role::all() as $r)
-                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group">
+                                <label>Выберите роль</label>
+                                <div class="d-flex flex-wrap">
+                                    @foreach (\App\Models\Role::all() as $r)
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" id="role_{{ $r->id }}"
+                                                value="{{ $r->id }}" wire:model.defer="role">
+                                            <label class="form-check-label" for="role_{{ $r->id }}">
+                                                {{ $r->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             <input wire:model.defer="phone" type="text" placeholder="Телефон" class="form-control">
                             @error('phone')
                                 <div class="text-danger small">{{ $message }}</div>
