@@ -1,8 +1,8 @@
     @props(['user' => auth()->user()])
 
     @guest
-        <button class="btn" x-data @click="$dispatch('show-register-modal')">
-            Войти / зарегистрироваться
+        <button class="btn --white" x-data @click="$dispatch('show-register-modal')">
+            Войти
         </button>
     @endguest
 
