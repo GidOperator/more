@@ -22,11 +22,10 @@
 
     {{-- Header --}}
     @include('components.layouts.header')
-    {{-- Livewire Register Modal --}}
-    @livewire('auth.register-modal')
-    {{-- Livewire Forgot Password Modal --}}
-    @livewire('auth.forgot-password-modal')
 
+    {{-- Livewire Modals --}}
+    @livewire('auth.register-modal')
+    @livewire('auth.forgot-password-modal')
 
     {{-- Основной контент --}}
     <main class="container my-4">
@@ -47,11 +46,9 @@
 
     {{-- Livewire скрипты --}}
     @livewireScripts
-    @livewireStyles
 
     {{-- Свои скрипты --}}
     <script src="{{ asset('js/main.js') }}"></script>
-
 </body>
 
 </html>

@@ -25,11 +25,17 @@ class RegisterModal extends Component
 
     public $policyAccepted = false;
 
+    //Глазик пароля
+    public bool $showPassword = false;
+    public bool $showPasswordConfirm = false;
+    public bool $showLoginPassword = false;
+
 
     #[On('show-register-modal')]
     public function openModal()
     {
         $this->resetForm();
+        $this->mode = 'login';
         $this->showModal = true;
     }
 
@@ -53,9 +59,14 @@ class RegisterModal extends Component
     public function startRegister()
     {
         //dd($this->all());
+        $this->phone = preg_replace('/[^0-9\+]/', '', $this->phone);
+
+        if (strlen($this->phone) === 11 && ($this->phone[0] === '7' || $this->phone[0] === '8')) {
+            $this->phone = '+7' . substr($this->phone, 1);
+        }
         $this->validate([
             'role' => 'required|exists:roles,id',
-            'phone' => 'required|string|digits:11|unique:users,phone',
+            'phone' => ['required', 'string', 'unique:users,phone', 'regex:/^\+7\d{10}$/'],
             'password' => 'required|string|min:6|same:password_confirmation',
             'password_confirmation' => 'required',
             'policyAccepted' => 'required|accepted',
