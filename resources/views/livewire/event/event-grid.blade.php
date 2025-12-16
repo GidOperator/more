@@ -84,23 +84,9 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $event->name }}</h5>
 
-                            <small class="text-muted">
-                                {{ optional($event->category)->name ?? 'Без категории' }} /
-                                {{ optional($event->subCategory)->name ?? 'Без подкатегории' }}
-                            </small>
-
                             <p class="mt-2 text-muted">
                                 {{ Str::limit($event->description, 60) }}
                             </p>
-
-                            <div class="mt-auto">
-                                <div class="fw-bold text-primary">
-                                    {{ number_format($event->price, 0, '.', ' ') }} ₽
-                                </div>
-                                <small class="text-muted">
-                                    {{ $event->date_start->format('d.m.Y') }}
-                                </small>
-                            </div>
 
                             <div>
                                 {{ $event->user->name }}
@@ -109,12 +95,18 @@
 
                             </div>
 
+
                             <div>
-                                {{ $event->address }}
+                                {{ $event->date_start->format('d.m.Y') }}
+                                {{ $event->time_start }}
                             </div>
 
                             <div>
-                                {{ $event->time_start }}
+                                {{ $event->duration_minutes }}
+                            </div>
+
+                            <div>
+                                {{ $event->address }}
                             </div>
 
                             <div>
@@ -122,7 +114,12 @@
                             </div>
 
                             <div>
-                                {{ $event->duration_minutes }}
+                                {{ $event->limit }}
+                            </div>
+
+
+                            <div class="fw-bold text-primary">
+                                {{ number_format($event->price, 0, '.', ' ') }} ₽
                             </div>
 
                         </div>
