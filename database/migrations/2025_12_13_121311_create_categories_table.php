@@ -21,6 +21,9 @@ return new class extends Migration
             $table->text('seo_description')->nullable();
 
             $table->string('image');
+
+            $table->text('icon_svg')->nullable();
+
             $table->timestamps();
         });
     }

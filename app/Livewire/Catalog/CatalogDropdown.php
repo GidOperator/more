@@ -20,6 +20,7 @@ class CatalogDropdown extends Component
 
     public function toggleCategory($categoryId)
     {
+        //dd($categoryId);
         if (in_array($categoryId, $this->expandedCategories)) {
             $this->expandedCategories = array_diff($this->expandedCategories, [$categoryId]);
         } else {
@@ -32,6 +33,7 @@ class CatalogDropdown extends Component
 
     public function selectSubcategory($subcategoryId)
     {
+        //dd($subcategoryId);
         $this->selectedSubcategory = $subcategoryId;
     }
 

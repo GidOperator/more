@@ -14,8 +14,21 @@
                     @foreach ($categories as $category)
                         <li class="mb-2">
                             <div class="p-2 rounded" :class="{ 'bg-light': activeCategory === {{ $category->id }} }"
-                                style="cursor: pointer;"
-                                @mouseenter="activeCategory = {{ $category->id }}; $wire.set('selectedCategory', {{ $category->id }}); $wire.set('selectedSubcategory', null)">
+                                style="cursor: pointer;" {{-- hover: только визуал + подгрузка подкатегорий --}}
+                                @mouseenter="
+        activeCategory = {{ $category->id }};
+        $wire.set('selectedCategory', {{ $category->id }});
+        $wire.set('selectedSubcategory', null);
+    "
+                                {{-- click: выбор категории + фильтр товаров --}}
+                                @click="
+        $wire.toggleCategory({{ $category->id }});
+        Livewire.dispatch('categorySelected', { categoryId: {{ $category->id }} });
+        open = false;
+        ">
+                                @if ($category->icon_svg)
+                                    <span class="me-2">{!! $category->icon_svg !!}</span>
+                                @endif
                                 {{ $category->name }}
                             </div>
                         </li>
@@ -24,7 +37,7 @@
             </div>
 
             <!-- Справа: Подкатегории выбранной категории -->
-            <div class="col-8 h-100 overflow-auto">
+            <div class="col-8 h-100 overflow-auto" x-data="{ activeSubcategory: null }">
                 <ul class="list-unstyled mb-0">
                     @if ($categories)
                         @php
@@ -33,9 +46,13 @@
                         @if ($selected && $selected->subcategories)
                             @foreach ($selected->subcategories as $sub)
                                 <li class="p-2 rounded" style="cursor: pointer;"
-                                    @mouseover="this.style.backgroundColor='#f0f0f0'"
-                                    @mouseout="this.style.backgroundColor='transparent'"
-                                    wire:click="$set('selectedSubcategory', {{ $sub->id }})">
+                                    :class="{ 'bg-light': activeSubcategory === {{ $sub->id }} }"
+                                    {{-- hover: визуал --}} @mouseover="activeSubcategory = {{ $sub->id }}"
+                                    @mouseout="activeSubcategory = null" {{-- click: бизнес-логика --}}
+                                    @click="
+        $wire.selectSubcategory({{ $sub->id }});
+        Livewire.dispatch('subcategorySelected', { subcategoryId: {{ $sub->id }} });
+    open = false">
                                     {{ $sub->name }}
                                 </li>
                             @endforeach
