@@ -7,4 +7,7 @@
     <div class="mt-5">
         <livewire:event-organizers.event-organizers-grid wire:key="organizers-grid" />
     </div>
+    <div class="mt-5">
+        <livewire:review.event-reviews />
+    </div>
 @endsection
