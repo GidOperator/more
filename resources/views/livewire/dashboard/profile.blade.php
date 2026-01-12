@@ -1,108 +1,93 @@
-<div>
+<div class="container my-4 p-4 bg-white rounded shadow-sm">
     <form wire:submit.prevent="save">
 
-        {{-- 2. Динамические поля профиля --}}
-        @if ($activeRole === 3)
-            <h3>Данные партнера</h3>
+        {{-- Контейнер: аватар слева, поля справа --}}
+        <div class="row g-3 align-items-start">
 
-            <input type="text" wire:model="profile.company_name" placeholder="Название компании">
-
-            <input type="text" wire:model="profile.inn" placeholder="ИНН">
-        @elseif ($activeRole === 2)
-            <h3>Данные организатора</h3>
-
-            {{-- Инфо-блок --}}
-            <div class="profile-info">
-                <div class="info-item">
-                    <strong>Название организации:</strong>
-                    <span>{{ $profile['name'] ?? 'Не указано' }}</span>
-                </div>
-
-                <div class="info-item">
-                    <strong>Описание:</strong>
-                    <p>{{ $profile['description'] ?? 'Описание отсутствует' }}</p>
-                </div>
-            </div>
-
-            {{-- Форма --}}
-            <div class="form-group">
-                <label>Название организации</label>
-                <input type="text" wire:model="profile.name" placeholder="Введите название">
-
-                @error('profile.name')
-                    <span style="color: red;">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Описание</label>
-                <textarea wire:model="profile.description" placeholder="Расскажите о себе или организации" rows="4"></textarea>
-
-                @error('profile.description')
-                    <span style="color: red;">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Публичный адрес (Slug)</label>
-                <input type="text" wire:model="profile.public_slug" placeholder="my-org-name">
-
-                @error('profile.public_slug')
-                    <span style="color: red;">{{ $message }}</span>
-                @enderror
-            </div>
-        @elseif ($activeRole === 1)
-            <h3>Данные участника</h3>
-
-            <input type="text" wire:model="profile.bio" placeholder="О себе">
-        @endif
-
-        <hr>
-
-        {{-- 3. Загрузка фото --}}
-        <div class="photo-upload-wrapper">
-            <label>
-                {{ $activeRole === 1 ? 'Ваш аватар' : 'Логотип организации' }}
-            </label>
-
-            <div class="current-photo">
-                @if ($photo)
-                    <img src="{{ $photo->temporaryUrl() }}" width="150">
-                @else
-                    @php
-                        $currentImage = $profile['logo'] ?? ($profile['avatar'] ?? null);
-                    @endphp
-
-                    @if ($currentImage)
-                        <img src="{{ asset('storage/' . $currentImage) }}" width="150">
+            {{-- Фото --}}
+            <div class="col-auto text-center">
+                <div class="mb-2" style="width: 100px; height: 100px;">
+                    @if ($photo)
+                        <img src="{{ $photo->temporaryUrl() }}"
+                            class="img-fluid rounded border w-100 h-100 object-fit-cover">
                     @else
-                        <img src="{{ asset('images/default-placeholder.png') }}" width="150">
+                        @php
+                            $currentImage = $profile['logo'] ?? ($profile['avatar'] ?? null);
+                        @endphp
+                        @if ($currentImage)
+                            <img src="{{ asset('storage/' . $currentImage) }}"
+                                class="img-fluid rounded border w-100 h-100 object-fit-cover">
+                        @else
+                            <img src="{{ asset('images/default-placeholder.png') }}"
+                                class="img-fluid rounded border w-100 h-100 object-fit-cover">
+                        @endif
                     @endif
+                </div>
+
+                <input type="file" wire:model="photo" class="form-control form-control-sm">
+                <div wire:loading wire:target="photo" class="text-muted small mt-1">Загрузка...</div>
+                @error('photo')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            {{-- Поля --}}
+            <div class="col">
+                {{-- Динамические поля профиля --}}
+                @if ($activeRole === 3)
+                    <h5>Данные партнера</h5>
+                    <div class="mb-3">
+                        <input type="text" wire:model="profile.company_name" placeholder="Название компании"
+                            class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" wire:model="profile.inn" placeholder="ИНН" class="form-control">
+                    </div>
+                @elseif ($activeRole === 2)
+                    <h5>Данные организатора</h5>
+
+                    <div class="mb-3">
+                        <label class="form-label">Название организации</label>
+                        <input type="text" wire:model="profile.name" placeholder="Введите название"
+                            class="form-control">
+                        @error('profile.name')
+                            <span class="text-danger small">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Описание</label>
+                        <textarea wire:model="profile.description" rows="3" placeholder="Расскажите о себе или организации"
+                            class="form-control"></textarea>
+                        @error('profile.description')
+                            <span class="text-danger small">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Публичный адрес (Slug)</label>
+                        <input type="text" wire:model="profile.public_slug" placeholder="my-org-name"
+                            class="form-control">
+                        @error('profile.public_slug')
+                            <span class="text-danger small">{{ $message }}</span>
+                        @enderror
+                    </div>
+                @elseif ($activeRole === 1)
+                    <h5>Данные участника</h5>
+                    <div class="mb-3">
+                        <input type="text" wire:model="profile.bio" placeholder="О себе" class="form-control">
+                    </div>
                 @endif
             </div>
 
-            <input type="file" wire:model="photo">
-
-            <div wire:loading wire:target="photo">
-                Загрузка файла...
-            </div>
-
-            @error('photo')
-                <span style="color: red;">{{ $message }}</span>
-            @enderror
         </div>
 
-        <hr>
+        <hr class="my-4">
 
-        {{-- 4. Кнопка --}}
-        <div class="form-actions">
-            <button type="submit" class="btn-save">
-                Сохранить изменения
-            </button>
-
-            <div wire:loading wire:target="save">
-                Сохранение...
-            </div>
+        {{-- Кнопка --}}
+        <div class="d-flex justify-content-end align-items-center">
+            <button type="submit" class="btn btn-primary me-3">Сохранить изменения</button>
+            <div wire:loading wire:target="save" class="text-muted small">Сохранение...</div>
         </div>
 
     </form>
