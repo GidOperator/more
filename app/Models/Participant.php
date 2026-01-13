@@ -10,4 +10,9 @@ class Participant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function languages()
+    {
+        return $this->morphToMany(Language::class, 'languageable');
+    }
 }

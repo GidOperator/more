@@ -26,4 +26,9 @@ class Partner extends Model
     {
         return $this->hasMany(ServicePartner::class);
     }
+
+    public function languages()
+    {
+        return $this->morphToMany(Language::class, 'languageable');
+    }
 }

@@ -79,6 +79,39 @@
 
         </div>
 
+        <div class="mt-4">
+            <h5>Мои языки</h5>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                @forelse($myLanguages as $lang)
+                    <span class="badge bg-primary d-flex align-items-center p-2">
+                        {{ $lang->name }}
+                        {{-- Кнопка удаления просто убирает ID из массива --}}
+                        <button type="button" class="btn-close btn-close-white ms-2" style="font-size: 0.5rem"
+                            wire:click="$set('profile.selected_languages', {{ collect($this->profile['selected_languages'])->reject(fn($id) => $id == $lang->id)->values() }})">
+                        </button>
+                    </span>
+                @empty
+                    <span class="text-muted">Вы еще не выбрали языки</span>
+                @endforelse
+            </div>
+
+            <h5>Доступные языки</h5>
+            <div class="row row-cols-2 row-cols-md-4 g-2">
+                @foreach ($availableLanguages as $lang)
+                    <div class="col">
+                        <div class="form-check border rounded p-2">
+                            {{-- При клике ID добавится в массив, и в следующем цикле render язык исчезнет отсюда --}}
+                            <input class="form-check-input ms-0 me-2" type="checkbox" value="{{ $lang->id }}"
+                                wire:model="profile.selected_languages" id="lang_{{ $lang->id }}">
+                            <label class="form-check-label" for="lang_{{ $lang->id }}">
+                                {{ $lang->name }}
+                            </label>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <hr class="my-4">
 
         {{-- Кнопка --}}

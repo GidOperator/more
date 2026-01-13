@@ -16,4 +16,14 @@ class Organizer extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public function documents()
+    {
+        return $this->hasMany(OrganizerDocument::class);
+    }
+
+    public function languages()
+    {
+        return $this->morphToMany(Language::class, 'languageable');
+    }
 }
