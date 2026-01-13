@@ -141,7 +141,7 @@ class RegisterModal extends Component
         }
 
         // 2. Дополнительные профили
-        match ($regData['role_id']) {
+        match ((int)$regData['role_id']) {
             2 => $user->organizer()->create(),
             3 => $user->partner()->create(),
             default => null,

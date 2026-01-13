@@ -20,8 +20,8 @@ return new class extends Migration
                 ->unique();
 
             // Основные данные
-            $table->string('company_name');
-            $table->string('public_slug')->unique();
+            $table->string('company_name')->nullable();
+            $table->string('public_slug')->nullable()->unique();
             $table->text('description')->nullable();
 
             // Медиа

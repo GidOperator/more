@@ -40,9 +40,6 @@
                         <input type="text" wire:model="profile.company_name" placeholder="Название компании"
                             class="form-control">
                     </div>
-                    <div class="mb-3">
-                        <input type="text" wire:model="profile.inn" placeholder="ИНН" class="form-control">
-                    </div>
                 @elseif ($activeRole === 2)
                     <h5>Данные организатора</h5>
 
