@@ -21,4 +21,14 @@
         <p class="text-gray-500">Отзывов пока нет</p>
     @endforelse
 
+    <div class="promo-section"
+        style="margin-top: 40px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 20px;">
+        @livewire('banner.promo-banner', [
+            'title' => 'Работаем на рынке с 1991 года',
+            'image' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+            'link' => '/about',
+            'viewType' => 'button',
+        ])
+    </div>
+
 </div>
