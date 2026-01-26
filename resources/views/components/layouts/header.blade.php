@@ -22,10 +22,14 @@
      </div>
      <div class="header__bottom">
          <div class="header__bottom-inner container">
-             <livewire:catalog.catalog-dropdown />
              <nav class="top-menu-wrap">
                  <ul class="top-menu">
-                     <li class="top-menu__item"><a class="top-menu__link --active" href="#">События</a></li>
+                     <li class="top-menu__item">
+                         <a class="top-menu__link" href="#"
+                             onclick="Livewire.dispatch('toggleMenu'); return false;">
+                             События
+                         </a>
+                     </li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Организаторы</a></li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Локации</a></li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Партнёры</a></li>

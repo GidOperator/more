@@ -4,6 +4,7 @@ namespace App\Livewire\Catalog;
 
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\Attributes\On;
 
 class CatalogDropdown extends Component
 {
@@ -29,6 +30,13 @@ class CatalogDropdown extends Component
 
         $this->selectedCategory = $categoryId;
         $this->selectedSubcategory = null;
+    }
+
+    #[On('toggleMenu')]
+    public function toggleMenu()
+    {
+        //dd($this->showMenu);
+        $this->showMenu = !$this->showMenu;
     }
 
     public function selectSubcategory($subcategoryId)
