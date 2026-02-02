@@ -607,6 +607,7 @@ a {
 }
 
 .header__bottom-inner {
+    position: relative;
     height: 64px;
     display: flex;
     align-items: center;
@@ -630,11 +631,80 @@ a {
     display: inline-block;
     transition: .3s;
 }
+
 .top-menu__link:hover,
 .top-menu__link.--active {
     background-color: #fff;
     color: var(--blue);
 }
+.mega-menu-wrapper {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    padding-top: 15px;
+    display: none;
+    z-index: 9999;
+}
+.mega-menu {
+    padding: 20px;
+    border-radius: 0.75em;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+}
+.mega-menu__inner {
+  width: 100%;
+  overflow-y: auto;
+}
+a.mega-menu__category,
+a.mega-menu__item-link {
+  color: var(--black);
+}
+
+.has-child:hover + .mega-menu-wrapper,
+.mega-menu-wrapper:hover {
+  display: block;
+}
+.has-child:hover + .mega-menu-wrapper {
+    animation: spFadeInUp 400ms ease-in;
+}
+
+
+
+/* Обертка меню с многоколоночным макетом */
+.mega-menu__inner {
+    width: 1200px;
+    overflow-y: auto;
+    background-color: #fff;
+    column-count: 4;
+    column-gap: 2rem;
+}
+
+/* Элементы колонок с запретом разрыва */
+.mega-menu__col {
+    break-inside: avoid-column;
+    display: inline-block;
+    /* width: 100%; */
+}
+
+@keyframes spFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
 .search {
     flex: 1;
 }
