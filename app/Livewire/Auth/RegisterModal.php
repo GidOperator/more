@@ -37,6 +37,8 @@ class RegisterModal extends Component
         $this->resetForm();
         $this->mode = 'login';
         $this->showModal = true;
+
+        $this->role = \App\Models\Role::first()?->id;
     }
 
     #[On('close-register-modal')]
@@ -163,8 +165,9 @@ class RegisterModal extends Component
 
     public function login()
     {
+        $this->loginPhone = preg_replace('/[^\d+]/', '', $this->loginPhone);
         $this->validate([
-            'loginPhone' => 'required|digits:11',
+            'loginPhone' => 'required|min:11|max:12',
             'loginPassword' => 'required',
         ]);
 

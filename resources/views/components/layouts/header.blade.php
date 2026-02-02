@@ -31,9 +31,19 @@
                          <div class="mega-menu-wrapper"><livewire:catalog.catalog-dropdown /></div>
                      </li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Организаторы</a></li>
-                     <li class="top-menu__item"><a class="top-menu__link" href="#">Локации</a></li>
+                     <li class="top-menu__item">
+                         <a class="top-menu__link has-child" href="#">Локации</a>
+                         <div class="mega-menu-wrapper">
+                             <livewire:location.location-dropdown />
+                         </div>
+                     </li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Партнёры</a></li>
-                     <li class="top-menu__item"><a class="top-menu__link" href="#">Услуги</a></li>
+                     <li class="top-menu__item">
+                         <a class="top-menu__link has-child" href="#">Услуги</a>
+                         <div class="mega-menu-wrapper">
+                             <livewire:services.services-dropdown />
+                         </div>
+                     </li>
                      <li class="top-menu__item"><a class="top-menu__link" href="#">Медиа контент</a></li>
                  </ul>
              </nav>
