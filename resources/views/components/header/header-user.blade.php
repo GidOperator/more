@@ -22,8 +22,6 @@
             </div>
         </div>
         <div class="user__info-wrap">
-            <span class="user__name">{{ Auth::user()->name }}</span>
-            <div class="user__discr">{{ Auth::user()->roles->first()->name }}</div>
             <livewire:cabinet.cabinet-switcher />
         </div>
 
