@@ -1,15 +1,13 @@
-<div class="mega-menu">
-    <div class="container">
-        <div class="mega-menu__grid">
-            @foreach ($categories as $category)
-                <a href="#" class="mega-menu__card" wire:key="cat-{{ $category->id }}" style="text-decoration: none;">
-                    <div class="mega-menu__card-content">
-                        <span class="mega-menu__card-name" style="color: #000; font-weight: 600;">
-                            {{ $category->name }}
-                        </span>
-                    </div>
-                </a>
-            @endforeach
-        </div>
+<div class="simple-dropdown">
+    <div class="simple-dropdown__box">
+        @foreach ($categories as $category)
+        <a href="#" class="simple-dropdown__link" wire:key="cat-{{ $category->id }}">
+            <div class="simple-dropdown__link-content">
+                <span class="simple-dropdown__name">
+                    {{ $category->name }}
+                </span>
+            </div>
+        </a>
+        @endforeach
     </div>
 </div>
