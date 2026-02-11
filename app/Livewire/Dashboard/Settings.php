@@ -35,6 +35,7 @@ class Settings extends Component
             };
         });
 
+        $this->dispatch('roles-updated');
         $this->reset('roleId');
     }
 
@@ -97,6 +98,8 @@ class Settings extends Component
                 session()->forget('active_cabinet');
             }
         });
+
+        $this->dispatch('roles-updated');
     }
 
     public function render()
