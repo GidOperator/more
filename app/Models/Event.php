@@ -59,4 +59,9 @@ class Event extends Model
             ->copy()
             ->setTimeFromTimeString($this->time_start);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

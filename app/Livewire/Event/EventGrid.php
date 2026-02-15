@@ -13,19 +13,37 @@ class EventGrid extends Component
     public int $amount = 12;
     public ?int $categoryId = null;
     public ?int $subcategoryId = null;
+    public ?string $citySlug = null;
 
+    public function mount()
+    {
+        // Берем slug напрямую из параметров текущего роута
+        $this->citySlug = request()->route('city_slug');
+    }
     public function render()
     {
+        //dd($this->citySlug);
+
         $cacheKey = "events:grid:"
+            . "city:{$this->citySlug}:"
             . "cat:{$this->categoryId}:"
             . "sub:{$this->subcategoryId}:"
             . "amount:{$this->amount}";
 
         $events = Cache::remember($cacheKey, now()->addMinutes(5), function () {
 
-            $query = Event::with(['images', 'category', 'subCategory', 'organizer'])
+            $query = Event::with(['images', 'category', 'subCategory', 'organizer', 'city'])
                 ->latest();
 
+
+            // ФИЛЬТРАЦИЯ ПО ГОРОДУ
+            if ($this->citySlug) {
+                $query->whereHas('city', function ($q) {
+                    $q->where('slug', $this->citySlug);
+                });
+            }
+
+            // ФИЛЬТРАЦИЯ ПО КАТЕГОРИЯМ
             if ($this->subcategoryId) {
                 $query->where('sub_category_id', $this->subcategoryId);
             } elseif ($this->categoryId) {

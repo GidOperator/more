@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="event-card__adress">
-                                {{ $event->address }}
+                                {{ $event->city?->name }}{{ $event->address ? ', ' . $event->address : '' }}
                             </div>
 
                             <div class="event-card__footer">
