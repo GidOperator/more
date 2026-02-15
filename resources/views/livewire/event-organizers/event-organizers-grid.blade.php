@@ -3,16 +3,13 @@
         <h2 class="section-title">
             Организаторы
         </h2>
-        <a href="#">
-            Показать ещё
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="#0B6FF6" />
-            </svg>
+        <a href="#" class="show-more">
+            <span>Показать ещё</span> <span class="icon-rght"></span>
         </a>
     </div>
 
     @if ($organizers->isEmpty())
-        <p class="text-gray-500">Организаторы не найдены</p>
+        <p class="info-message">Организаторы не найдены</p>
     @else
         <div class="grid-4-cols">
             @foreach ($organizers as $organizer)
@@ -61,15 +58,4 @@
             @endforeach
         </div>
     @endif
-
-    <div class="promo-section"
-        style="margin-top: 40px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 20px;">
-        @livewire('banner.promo-banner', [
-            'title' => 'Посмотрите наши популярные маршруты',
-            'image' => 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80',
-            'link' => '/routes',
-            'viewType' => 'link',
-        ])
-    </div>
-
 </div>

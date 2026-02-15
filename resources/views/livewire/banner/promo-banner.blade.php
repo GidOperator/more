@@ -1,6 +1,6 @@
-<div class="promo-banner-container" style="margin-bottom: 20px;">
-    <div class="banner-body">
-        <img src="{{ $image }}" alt="{{ $title }}" class="banner-img">
+<div class="promo-banner-container">
+    <div class="banner-body" style="background-image: url({{ $image }});">
+        <!-- <img src="{{ $image }}" alt="{{ $title }}" class="banner-img"> -->
 
         {{-- Затемнение поверх картинки --}}
         <div class="banner-overlay"></div>
@@ -11,16 +11,13 @@
             </div>
 
             @if ($viewType === 'button')
-                <a href="{{ $link }}" class="banner-btn">
-                    Подробнее
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 8px;">
-                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor" />
-                    </svg>
-                </a>
+            <a href="{{ $link }}" class="btn --blue">
+                Открыть новые возможности
+            </a>
             @else
-                <a href="{{ $link }}" class="banner-link">
-                    Перейти в раздел →
-                </a>
+            <a href="{{ $link }}" class="banner-link">
+                К настройкам фильтра <span class="icon-rght"></span>
+            </a>
             @endif
         </div>
     </div>

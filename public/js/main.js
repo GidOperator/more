@@ -100,3 +100,40 @@ document.querySelector('.top-menu-wrap').addEventListener('click', function (e) 
         document.body.classList.remove('offcanvas-show');
     }
 });
+// User menu
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.querySelector('.user-menu-toggle');
+    const userMenu = document.getElementById('userMenu');
+    const userInfoWrap = toggleBtn ? toggleBtn.closest('.user__info-wrap') : null;
+
+
+    if (!userInfoWrap) {
+        console.error('Родительский элемент .user__info-wrap не найден');
+        return;
+    }
+
+    // Переключение меню при клике на кнопку
+    toggleBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        userMenu.classList.toggle('open');
+        userInfoWrap.classList.toggle('open');
+    });
+
+    // Закрытие меню при клике за его пределами
+    document.addEventListener('click', function (event) {
+        if (!userMenu.contains(event.target) && !toggleBtn.contains(event.target) && !userInfoWrap.contains(event.target)) {
+            userMenu.classList.remove('open');
+            userInfoWrap.classList.remove('open');
+        }
+    });
+
+    // Закрытие меню при нажатии на клавишу Escape
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            userMenu.classList.remove('open');
+            userInfoWrap.classList.remove('open');
+        }
+    });
+});
