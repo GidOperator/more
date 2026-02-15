@@ -1,5 +1,7 @@
     @props(['user' => auth()->user()])
 
+    <livewire:city.header-city-selector />
+
     @guest
         <button class="btn --white" x-data @click="$dispatch('show-register-modal')">
             Войти
@@ -7,6 +9,7 @@
     @endguest
 
     @auth
+
         <div class="user-special">
             <a href="#" class="user-message"><i class="icon-email"></i> <span class="count">1</span></a>
             <a href="#" class="user-alert"><i class="icon-notifications"></i> <span class="count">99+</span></a>
