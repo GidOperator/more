@@ -34,6 +34,8 @@ class EventCreate extends Component
 
     public $city_id;
     public $address;
+    public $latitude;
+    public $longitude;
     public $max_participants = 0;
     public array $partner_categories = [];
     public Collection $partnerCategories;
@@ -51,6 +53,8 @@ class EventCreate extends Component
         'address' => 'required|string',
         'price' => 'required|numeric|min:0',
         'media.*' => 'nullable|image|max:10240',
+        'latitude' => 'nullable|numeric|between:-90,90',
+        'longitude' => 'nullable|numeric|between:-180,180',
     ];
 
     public function mount()
@@ -87,9 +91,11 @@ class EventCreate extends Component
     }
 
     #[On('addressUpdated')]
-    public function updateAddress($address)
+    public function updateAddress($address, $lat = null, $lng = null)
     {
         $this->address = $address;
+        $this->latitude = $lat;
+        $this->longitude = $lng;
     }
 
     public function save()
@@ -103,6 +109,8 @@ class EventCreate extends Component
             'description'      => $this->description,
             'slug'             => Str::slug($this->title) . '-' . uniqid(),
             'address'          => $this->address,
+            'latitude'         => $this->latitude,
+            'longitude'        => $this->longitude,
             'city_id'          => $this->city_id,
             'date_start'       => date('Y-m-d', strtotime($this->start_at)),
             'date_end'         => date('Y-m-d', strtotime($this->end_at)),

@@ -5,8 +5,8 @@
     @if (count($suggestions))
         <ul class="list-group position-absolute w-100 shadow-sm" style="z-index:1000;" x-show="open">
             @foreach ($suggestions as $item)
-                <li class="list-group-item list-group-item-action" wire:click="select('{{ $item['value'] }}')"
-                    @click="open = false">
+                <li class="list-group-item list-group-item-action" wire:click="select({{ json_encode($item) }})"
+                    @click="open = false" style="cursor: pointer;">
                     {{ $item['value'] }}
                 </li>
             @endforeach

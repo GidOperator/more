@@ -97,6 +97,13 @@
         <div class="mb-3">
             <label class="form-label">Адрес</label>
             @livewire('city.address-suggest', ['wire:model' => 'address'], key('address-suggest'))
+
+            <input type="hidden" wire:model.defer="latitude">
+            <input type="hidden" wire:model.defer="longitude">
+
+            @error('latitude')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3" wire:ignore x-data="categoryDropdown(@entangle('subcategory_id'), {{ json_encode($categories) }})" @click.away="close()">

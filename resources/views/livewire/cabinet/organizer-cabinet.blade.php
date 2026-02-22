@@ -26,6 +26,11 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link @if ($tab === 'favorites') active @endif"
+                wire:click.prevent="setTab('favorites')">Избранное</a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link @if ($tab === 'chats') active @endif"
                 wire:click.prevent="setTab('chats')">Чаты и уведомления</a>
         </li>
