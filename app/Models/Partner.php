@@ -31,4 +31,15 @@ class Partner extends Model
     {
         return $this->morphToMany(Language::class, 'languageable');
     }
+
+    public function selectedCategories()
+    {
+        // Указываем таблицу связи вторым аргументом, так как имя нестандартное
+        return $this->belongsToMany(
+            \App\Models\CategoryPartner::class,
+            'category_partner_partner',
+            'partner_id',
+            'category_partner_id'
+        );
+    }
 }

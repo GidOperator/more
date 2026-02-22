@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('slug')->unique();
             $table->foreignId('city_id')->constrained();
             $table->string('address');
             $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
 
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
 
             $table->foreignId('partner_id')->constrained();
-            $table->foreignId('category_partner_id')->constrained();
+
             $table->timestamps();
         });
     }

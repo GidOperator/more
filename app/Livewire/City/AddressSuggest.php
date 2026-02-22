@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\City;
 use App\Services\DadataService;
 use App\Livewire\Event\EventCreate;
+use App\Livewire\Location\LocationCreate;
+use Termwind\Components\Li;
 
 class AddressSuggest extends Component
 {
@@ -54,13 +56,24 @@ class AddressSuggest extends Component
         );
     }
 
-    public function select(string $value)
+    public function select(array $suggestion)
     {
-        $this->query = $value;
+        $this->query = $suggestion['value'];
         $this->suggestions = [];
         $this->selected = true;
-        // Отправляем событие наверх родителю
-        $this->dispatch('addressUpdated', address: $value)->to(EventCreate::class);
+
+        // Извлекаем координаты из структуры DaData
+        // В DaData они называются geo_lat и geo_lon
+        $lat = $suggestion['data']['geo_lat'] ?? null;
+        $lon = $suggestion['data']['geo_lon'] ?? null;
+
+        // Просто диспатчим событие на всю страницу (без .to)
+        $this->dispatch(
+            'addressUpdated',
+            address: $this->query,
+            lat: $lat,
+            lng: $lon
+        );
     }
 
     public function render()

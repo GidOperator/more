@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('slug');
             $table->string('address');
 
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+
             $table->date('date_start');
             $table->date('date_end');
-
 
             $table->time('time_start')->after('date_start');
             $table->time('time_end')->after('date_end')->nullable();

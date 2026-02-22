@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('dictionaries', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
+            $table->string('collection'); // Группа: 'location_type'
+            $table->string('label');      // Название: 'Лофт'
+            $table->string('code');       // Код: 'loft'
             $table->integer('sort')->default(0);
-
-            $table->string('alt')->nullable();   // alt для SEO
-            $table->string('title')->nullable(); // title для SEO
-
-            $table->morphs('imageable');
-
             $table->timestamps();
+
+            $table->unique(['collection', 'code']);
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('dictionaries');
     }
 };

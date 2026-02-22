@@ -8,6 +8,8 @@ use App\Livewire\Event\EventCreate;
 use App\Livewire\Cabinet\OrganizerCabinet;
 use App\Livewire\Cabinet\ParticipantCabinet;
 use App\Livewire\Cabinet\PartnerCabinet;
+use App\Livewire\Services\ServiceCreate;
+use App\Livewire\Location\LocationCreate;
 
 // --- 1. СЛУЖЕБНЫЕ РОУТЫ (БЕЗ ПРЕФИКСА ГОРОДА) ---
 // Эти роуты должны быть выше, чтобы их не перехватил {city_slug}
@@ -49,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cabinet/organizer', OrganizerCabinet::class)->name('cabinet.organizer');
     Route::get('/cabinet/participant', ParticipantCabinet::class)->name('cabinet.participant');
     Route::get('/cabinet/partner', PartnerCabinet::class)->name('cabinet.partner');
+    Route::get('/services/create', ServiceCreate::class)->name('services.create');
+    Route::get('location/create', LocationCreate::class)->name('location.create');
 });
 
 // --- 3. ГРУППА ГОРОДА (ОСНОВНОЙ КОНТЕНТ) ---

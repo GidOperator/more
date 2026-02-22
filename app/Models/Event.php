@@ -25,7 +25,14 @@ class Event extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        // Указываем связь «один ко многим» полиморфно
+        return $this->morphMany(Image::class, 'imageable')->orderBy('sort');
+    }
+
+    // Полезный помощник для получения главного фото
+    public function mainImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->orderBy('sort')->limit(1);
     }
 
     public function videos()

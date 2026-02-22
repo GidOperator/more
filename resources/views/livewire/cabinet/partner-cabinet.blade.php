@@ -3,8 +3,8 @@
     {{-- Меню --}}
     <ul class="nav nav-tabs mb-4">
         <li class="nav-item">
-            <a class="nav-link @if ($tab === 'my_offers') active @endif"
-                wire:click.prevent="setTab('bookings')">Мои предложения</a>
+            <a class="nav-link @if ($tab === 'services') active @endif"
+                wire:click.prevent="setTab('services')">Мои Услуги</a>
         </li>
         <li class="nav-item">
             <a class="nav-link @if ($tab === 'statistics') active @endif"
@@ -22,6 +22,12 @@
             <a class="nav-link @if ($tab === 'filters') active @endif"
                 wire:click.prevent="setTab('reviews')">Отзывы</a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link @if ($tab === 'favorites') active @endif"
+                wire:click.prevent="setTab('favorites')">Избранное</a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link @if ($tab === 'chats') active @endif"
                 wire:click.prevent="setTab('chats')">Чаты и уведомления</a>
@@ -40,6 +46,10 @@
     {{-- Контент --}}
     <div class="card p-3">
         @switch($tab)
+            @case('services')
+                <livewire:dashboard.services />
+            @break
+
             @case('bookings')
                 <livewire:dashboard.bookings />
             @break
