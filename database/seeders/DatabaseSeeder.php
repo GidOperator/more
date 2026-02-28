@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewSeeder::class);
         $this->call(CategoryPartnerSeeder::class);
         $this->call(CategoryLocationSeeder::class);
-        $this->call(DictionarySeeder::class);
+        $this->call(LocationPartnerSeeder::class);
     }
 }

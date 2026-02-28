@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_locations', function (Blueprint $table) {
+        Schema::create('category_location_types', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
-            $table->text('svg_icon')->nullable();
-            $table->string('slug');
-            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+
+            $table->foreignId('category_location_id')->constrained();
+
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_locations');
+        Schema::dropIfExists('category_location_types');
     }
 };

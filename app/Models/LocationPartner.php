@@ -3,25 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class LocationPartner extends Model
 {
 
 
-    public function parther()
+    public function partner()
     {
         return $this->belongsTo(Partner::class);
-    }
-
-    public function category_partners()
-    {
-        return $this->belongsToMany(
-            CategoryPartner::class,
-            'category_location_partner', // Имя твоей новой сводной таблицы
-            'location_partner_id',       // Ключ этой модели в сводной таблице
-            'category_partner_id'        // Ключ категорий в сводной таблице
-        );
     }
 
     public function city()
@@ -46,9 +37,14 @@ class LocationPartner extends Model
         return $this->hasMany(ServicePartner::class);
     }
 
-    public function locationTypes(): MorphToMany
+    public function location_type(): BelongsTo
     {
-        // 'dictionable' — это название из миграции ($table->morphs('dictionable'))
-        return $this->morphToMany(Dictionary::class, 'dictionable');
+        return $this->belongsTo(CategoryLocationType::class, 'category_location_type_id');
+    }
+
+    public function suitable_event_types(): BelongsToMany
+    {
+        return $this->belongsToMany(SubCategory::class, 'location_subcategory_event', 'location_partner_id', 'sub_category_id')
+            ->withTimestamps();
     }
 }

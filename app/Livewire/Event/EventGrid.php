@@ -66,14 +66,14 @@ class EventGrid extends Component
         $this->view = $view;
     }
 
-    #[On('categorySelected')]
-    public function onCategorySelected(int $categoryId)
-    {
-        $this->categoryId = $categoryId;
-        $this->subcategoryId = null;
-
-        $this->resetAmount();
-    }
+    //#[On('categorySelected')]
+    //public function onCategorySelected(int $categoryId)
+    //{
+    //    $this->categoryId = $categoryId;
+    //    $this->subcategoryId = null;
+    //
+    //    $this->resetAmount();
+    //}
 
     #[On('subcategorySelected')]
     public function onSubcategorySelected(int $subcategoryId)
@@ -87,7 +87,6 @@ class EventGrid extends Component
     {
         $this->amount = 12;
     }
-
 
 
     public function loadMore()

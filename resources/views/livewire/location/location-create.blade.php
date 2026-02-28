@@ -18,9 +18,9 @@
         <div class="mb-3">
             <label class="form-label fw-bold">Тип</label>
             <select wire:model.defer="type" class="form-select">
-                <option value="">-- Выберите тип --</option>
+                <option value="" style="background-color: black;">-- Выберите тип --</option>
                 @foreach ($allTypes as $item)
-                    <option value="{{ $item->id }}">{{ $item->label }}</option>
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
             @error('type')

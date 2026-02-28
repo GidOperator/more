@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Location;
 
+use App\Models\Category;
+use App\Models\CategoryLocationType;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Dictionary;
 use App\Models\CategoryPartner;
-use App\Models\LocationPartner; // Замени на свою модель если имя другое
+use App\Models\LocationPartner;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 
@@ -39,6 +42,7 @@ class LocationCreate extends Component
         'categories' => 'required|array|min:1',
         'is_confirmed' => 'accepted',
         'photos.*' => 'image|max:10240', // 10MB max
+
     ];
 
     protected $messages = [
@@ -70,6 +74,7 @@ class LocationCreate extends Component
         $this->resetValidation(['address', 'latitude', 'longitude']);
     }
 
+
     public function save()
     {
         //dd($this->all());
@@ -87,27 +92,22 @@ class LocationCreate extends Component
             'latitude'    => $this->latitude,
             'longitude'   => $this->longitude,
             'partner_id' => auth()->user()->partner->id,
+            'category_location_type_id' => $this->type,
         ]);
 
-        // 2. Привязываем Тип локации (MorphToMany)
-        if ($this->type) {
-            $location->locationTypes()->sync([$this->type]);
-        }
 
-        // 3. Привязываем Категории (Many-to-Many через новую таблицу)
         if (!empty($this->categories)) {
-            // Используем имя метода из модели LocationPartner
-            $location->category_partners()->sync($this->categories);
+            $location->suitable_event_types()->sync($this->categories);
         }
 
-        // 4. Сохраняем фотографии (MorphMany)
+        // Сохраняем фотографии (MorphMany)
         if ($this->photos) {
             foreach ($this->photos as $index => $photo) {
                 $path = $photo->store('locations', 'public');
                 $location->images()->create([
                     'path' => $path,
                     'alt'  => $this->title,
-                    'sort' => $index, // сохраняем порядок загрузки
+                    'sort' => $index,
                 ]);
             }
         }
@@ -119,8 +119,8 @@ class LocationCreate extends Component
     public function render()
     {
         return view('livewire.location.location-create', [
-            'allTypes' => Dictionary::where('collection', 'location_type')->orderBy('sort')->get(),
-            'allCategories' => CategoryPartner::orderBy('name', 'asc')->get()
+            'allTypes' => CategoryLocationType::all(),
+            'allCategories' => SubCategory::orderBy('name', 'asc')->get()
         ])->layout('layouts.app');
     }
 }

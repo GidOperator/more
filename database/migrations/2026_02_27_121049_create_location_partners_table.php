@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
 
             $table->foreignId('partner_id')->constrained();
+            $table->foreignId('category_location_type_id')->constrained('category_location_types');
 
             $table->timestamps();
         });

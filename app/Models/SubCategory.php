@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class SubCategory extends Model
 {
@@ -24,5 +25,15 @@ class SubCategory extends Model
     public function participants()
     {
         return $this->morphedByMany(Participant::class, 'sub_categorizable');
+    }
+
+    public function locationPartners(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            LocationPartner::class,
+            'location_subcategory_event',
+            'sub_category_id',
+            'location_partner_id'
+        )->withTimestamps();
     }
 }

@@ -64,6 +64,14 @@ Route::prefix('{city_slug}')->group(function () {
         return view('events.index');
     })->name('events.index');
 
+    // --- СТРАНИЦА ЛОКАЦИЙ ---
+    Route::get('/locations', function ($city_slug) {
+        // Проверяем, существует ли город, чтобы не открывать локации несуществующего города
+        \App\Models\City::where('slug', $city_slug)->firstOrFail();
+
+        return view('locations.index', compact('city_slug'));
+    })->name('locations.index');
+
     // События
     Route::get('/event/create', EventCreate::class)->name('event.create');
     Route::get('/event/{event}', EventShow::class)->name('event.show');

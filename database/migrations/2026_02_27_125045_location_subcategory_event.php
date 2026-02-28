@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_location_partner', function (Blueprint $table) {
+        Schema::create('location_subcategory_event', function (Blueprint $table) {
             $table->id();
 
-            // Связь с локацией
+            // Ссылка на локацию партнера
             $table->foreignId('location_partner_id')
                 ->constrained('location_partners')
                 ->onDelete('cascade');
 
-            // Связь с категорией
-            $table->foreignId('category_partner_id')
-                ->constrained('category_partners')
+            // Ссылка на подкатегорию события (из вашего сидера)
+            $table->foreignId('sub_category_id')
+                ->constrained('sub_categories')
                 ->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->unique(['location_partner_id', 'sub_category_id'], 'loc_sub_unique');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_location_partner');
+        Schema::dropIfExists('location_subcategory_event');
     }
 };

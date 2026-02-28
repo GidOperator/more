@@ -30,9 +30,9 @@
     {{-- Основной контент --}}
     <main class="container my-4">
         @isset($slot)
-        {{ $slot }}
+            {{ $slot }}
         @else
-        @yield('content')
+            @yield('content')
         @endisset
     </main>
 
@@ -49,13 +49,13 @@
 
     {{-- 🔥 ОТКРЫТИЕ МОДАЛКИ ЛОГИНА --}}
     @if (session('open-login-modal'))
-    <script>
-        document.addEventListener('livewire:init', () => {
-            setTimeout(() => {
-                Livewire.dispatch('show-register-modal')
-            }, 0)
-        })
-    </script>
+        <script>
+            document.addEventListener('livewire:init', () => {
+                setTimeout(() => {
+                    Livewire.dispatch('show-register-modal')
+                }, 0)
+            })
+        </script>
     @endif
 
     {{-- Trix редактор --}}
@@ -63,6 +63,7 @@
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
     {{-- Свои скрипты --}}
+
     <script src="{{ asset('js/main.js') }}"></script>
 
 </body>

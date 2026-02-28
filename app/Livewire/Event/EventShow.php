@@ -4,6 +4,7 @@ namespace App\Livewire\Event;
 
 use Livewire\Component;
 use App\Models\Event;
+use Livewire\Attributes\On;
 
 class EventShow extends Component
 {
