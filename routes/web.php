@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('location/create', LocationCreate::class)->name('location.create');
 });
 
-// --- 3. ГРУППА ГОРОДА (ОСНОВНОЙ КОНТЕНТ) ---
+// --- ГРУППА ГОРОДА (ОСНОВНОЙ КОНТЕНТ) ---
 Route::prefix('{city_slug}')->group(function () {
 
     // Главная страница города
@@ -64,15 +64,28 @@ Route::prefix('{city_slug}')->group(function () {
         return view('events.index');
     })->name('events.index');
 
-    // --- СТРАНИЦА ЛОКАЦИЙ ---
+    // МАРШРУТ ДЛЯ ЛОКАЦИИ
     Route::get('/locations', function ($city_slug) {
-        // Проверяем, существует ли город, чтобы не открывать локации несуществующего города
         \App\Models\City::where('slug', $city_slug)->firstOrFail();
-
         return view('locations.index', compact('city_slug'));
     })->name('locations.index');
 
-    // События
+    // МАРШРУТ ДЛЯ ПАРТНЕРОВ
+    Route::get('/partners', function ($city_slug) {
+        \App\Models\City::where('slug', $city_slug)->firstOrFail();
+        return view('partners.index', compact('city_slug'));
+    })->name('partners.index');
+
+    // МАРШРУТ ДЛЯ СЕРВИСОВ
+    Route::get('/services', function ($city_slug) {
+        \App\Models\City::where('slug', $city_slug)->firstOrFail();
+        return view('services.index', compact('city_slug'));
+    })->name('services.index');
+
+    // КОНКРЕТНЫЕ МАРШРУТЫ СОБЫТИЙ
     Route::get('/event/create', EventCreate::class)->name('event.create');
     Route::get('/event/{event}', EventShow::class)->name('event.show');
+
+    // ПУБЛИЧНЫЕ СТРАНИЦЫ
+    Route::get('/{slug}', \App\Livewire\PublicPage\ShowPage::class);
 });

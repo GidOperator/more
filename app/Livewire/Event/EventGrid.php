@@ -13,19 +13,19 @@ class EventGrid extends Component
     public int $amount = 12;
     public ?int $categoryId = null;
     public ?int $subcategoryId = null;
-    public ?string $citySlug = null;
+    //public ?string $citySlug = null;
 
     public function mount()
     {
         // Берем slug напрямую из параметров текущего роута
-        $this->citySlug = request()->route('city_slug');
+        //$this->citySlug = request()->route('city_slug');
     }
     public function render()
     {
         //dd($this->citySlug);
 
         $cacheKey = "events:grid:"
-            . "city:{$this->citySlug}:"
+            //. "city:{$this->citySlug}:"
             . "cat:{$this->categoryId}:"
             . "sub:{$this->subcategoryId}:"
             . "amount:{$this->amount}";
@@ -37,11 +37,11 @@ class EventGrid extends Component
 
 
             // ФИЛЬТРАЦИЯ ПО ГОРОДУ
-            if ($this->citySlug) {
-                $query->whereHas('city', function ($q) {
-                    $q->where('slug', $this->citySlug);
-                });
-            }
+            //if ($this->citySlug) {
+            //    $query->whereHas('city', function ($q) {
+            //       $q->where('slug', $this->citySlug);
+            //   });
+            //}
 
             // ФИЛЬТРАЦИЯ ПО КАТЕГОРИЯМ
             if ($this->subcategoryId) {

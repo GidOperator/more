@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Participant extends Model
 {
@@ -19,5 +20,10 @@ class Participant extends Model
     public function subCategories()
     {
         return $this->morphToMany(SubCategory::class, 'sub_categorizable');
+    }
+
+    public function publicPage()
+    {
+        return $this->morphOne(PublicPage::class, 'pageable');
     }
 }

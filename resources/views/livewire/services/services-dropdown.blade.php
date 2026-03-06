@@ -1,13 +1,12 @@
-<div class="simple-dropdown">
-    <div class="simple-dropdown__box">
+<div class="services-list-container">
+    <div class="list-group">
         @foreach ($categories as $category)
-        <a href="#" class="simple-dropdown__link" wire:key="cat-{{ $category->id }}">
-            <div class="simple-dropdown__link-content">
-                <span class="simple-dropdown__name">
-                    {{ $category->name }}
-                </span>
-            </div>
-        </a>
+            <button type="button"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                wire:click="selectCategory({{ $category->id }})">
+                {{ $category->name }}
+                <i class="bi bi-chevron-right small text-muted"></i>
+            </button>
         @endforeach
     </div>
 </div>

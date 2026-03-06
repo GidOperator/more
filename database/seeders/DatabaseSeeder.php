@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryPartnerSeeder::class);
         $this->call(CategoryLocationSeeder::class);
         $this->call(LocationPartnerSeeder::class);
+        $this->call(ServicePartnerSeeder::class);
     }
 }

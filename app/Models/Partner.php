@@ -19,7 +19,12 @@ class Partner extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(CategoryPartner::class, 'category_partner_partner');
+        return $this->belongsToMany(
+            CategoryPartner::class,        // Модель категории
+            'category_partner_partner',    // Имя таблицы-связки
+            'partner_id',                  // Ключ этой модели в связке
+            'category_partner_id'          // Ключ категории в связке
+        );
     }
 
     public function services()
@@ -41,5 +46,10 @@ class Partner extends Model
             'partner_id',
             'category_partner_id'
         );
+    }
+
+    public function publicPage()
+    {
+        return $this->morphOne(PublicPage::class, 'pageable');
     }
 }

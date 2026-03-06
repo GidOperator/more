@@ -31,4 +31,9 @@ class Organizer extends Model
     {
         return $this->morphToMany(SubCategory::class, 'sub_categorizable');
     }
+
+    public function publicPage()
+    {
+        return $this->morphOne(PublicPage::class, 'pageable');
+    }
 }
