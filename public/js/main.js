@@ -102,15 +102,14 @@ document.querySelector('.top-menu-wrap').addEventListener('click', function (e) 
 });
 // User menu
 document.addEventListener('DOMContentLoaded', function () {
+    if (!document.querySelector('.user__info-wrap')) {
+        return; // Если элемента нет — выходим, остальной код не выполнится
+    }
+    
     const toggleBtn = document.querySelector('.user-menu-toggle');
     const userMenu = document.getElementById('userMenu');
     const userInfoWrap = toggleBtn ? toggleBtn.closest('.user__info-wrap') : null;
 
-
-    if (!userInfoWrap) {
-        console.error('Родительский элемент .user__info-wrap не найден');
-        return;
-    }
 
     // Переключение меню при клике на кнопку
     toggleBtn.addEventListener('click', function (event) {

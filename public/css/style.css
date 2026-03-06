@@ -1702,6 +1702,55 @@ a.mega-menu__item-link {
 
 
 
+/* Add Event */
+.create-event__header {
+  display: flex;
+  align-items: center;
+  gap: 0.625em;
+  margin-bottom: 2em;
+}
+.back-btn {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+.create-event__form-wrap {
+  display: grid;
+  gap: 1.5em;
+}
+.create-event__category-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.create-event__category-select .icon-chevrondown {
+  font-size: 24px;
+}
+.form-label.--strong {
+  font-weight: 600;
+  font-size: 1.125em;
+}
+.create-event__date-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+  padding: 1.875em;
+}
+.create-event__date-box {
+  border-radius: 0.5em;
+  padding: 2.25em;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* end Add Event */
+
+
+
+
+
+
 
 
 
