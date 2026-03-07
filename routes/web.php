@@ -27,7 +27,9 @@ Route::get('/clear-city', function () {
 });
 
 Route::get('/login', function () {
-    return redirect('/')->with('open-login-modal', true);
+    $slug = session('selected_city_slug') ?? session('detected_city_slug') ?? 'tomsk';
+    return redirect()->route('events.index', ['city_slug' => $slug])
+        ->with('open-login-modal', true);
 })->name('login');
 
 Route::post('/logout', function () {
@@ -46,7 +48,7 @@ Route::get('/', function () {
 });
 
 //ИЗБРАННОЕ
-Route::get('/favourite', \App\Livewire\Dashboard\Favorites::class)->name('favourite');
+Route::get('/favourite', \App\Livewire\Dashboard\Favorites::class)->name('favourite')->middleware('auth');
 
 // Кабинеты
 Route::middleware(['auth'])->group(function () {
