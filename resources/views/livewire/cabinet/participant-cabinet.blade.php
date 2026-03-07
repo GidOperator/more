@@ -14,10 +14,7 @@
             <a class="nav-link @if ($tab === 'media') active @endif"
                 wire:click.prevent="setTab('media')">Медиа</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link @if ($tab === 'favorites') active @endif"
-                wire:click.prevent="setTab('favorites')">Избранное</a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link @if ($tab === 'partners') active @endif"
                 wire:click.prevent="setTab('partners')">Мои партнёры</a>
@@ -47,10 +44,6 @@
 
             @case('media')
                 <livewire:dashboard.media />
-            @break
-
-            @case('favorites')
-                <livewire:dashboard.favorites />
             @break
 
             @case('chats')

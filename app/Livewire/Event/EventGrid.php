@@ -22,7 +22,6 @@ class EventGrid extends Component
     }
     public function render()
     {
-        //dd($this->citySlug);
 
         $cacheKey = "events:grid:"
             //. "city:{$this->citySlug}:"
@@ -87,7 +86,6 @@ class EventGrid extends Component
     {
         $this->amount = 12;
     }
-
 
     public function loadMore()
     {

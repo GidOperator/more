@@ -45,6 +45,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//ИЗБРАННОЕ
+Route::get('/favourite', \App\Livewire\Dashboard\Favorites::class)->name('favourite');
+
 // Кабинеты
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', Index::class)->name('dashboard');

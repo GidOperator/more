@@ -4,7 +4,6 @@ namespace App\Livewire\Partner;
 
 use Livewire\Component;
 use App\Models\Partner;
-use App\Models\City;
 
 class PartnerGrid extends Component
 {
@@ -32,12 +31,9 @@ class PartnerGrid extends Component
         // 2. Если категория выбрана, фильтруем
         if ($this->selectedCategoryId) {
             $partnersQuery->whereHas('categories', function ($query) {
-                // Здесь мы указываем ID категории из таблицы category_partners
                 $query->where('category_partners.id', $this->selectedCategoryId);
             });
         }
-
-        // 3. Добавляем сортировку по имени и выполняем запрос
         $partners = $partnersQuery->orderBy('company_name', 'asc')->get();
 
         return view('livewire.partner.partner-grid', [

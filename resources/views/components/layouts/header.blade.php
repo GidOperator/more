@@ -44,12 +44,7 @@
                              <livewire:catalog.catalog-dropdown />
                          </div>
                      </li>
-                     <li class="top-menu__item">
-                         <a class="top-menu__link" href="#">
-                             <span class="menu-icon icon-org d-lg-none"></span>
-                             Организаторы
-                         </a>
-                     </li>
+
                      <li class="top-menu__item has-child --relative">
                          <div class="menu-link-wrap">
                              <button class="icon-chevron-dwn menu-toggle level-1 d-lg-none"></button>
@@ -62,19 +57,7 @@
                              <livewire:location.location-dropdown />
                          </div>
                      </li>
-                     <li class="top-menu__item has-child --relative">
-                         <div class="menu-link-wrap">
-                             <button class="icon-chevron-dwn menu-toggle level-1 d-lg-none"></button>
-                             <a class="top-menu__link" href="#">
-                                 <span class="menu-icon icon-partner d-lg-none"></span>
-                                 Партнёры
-                             </a>
-                         </div>
 
-                         <div class="simple-dropdown-wrap wrapper-dropdown">
-                             <livewire:partner.partner-dropdown />
-                         </div>
-                     </li>
                      <li class="top-menu__item has-child --relative">
                          <div class="menu-link-wrap">
                              <button class="icon-chevron-dwn menu-toggle level-1 d-lg-none"></button>
@@ -88,9 +71,8 @@
                          </div>
                      </li>
                      <li class="top-menu__item">
-                         <a class="top-menu__link" href="#">
-                             <span class="menu-icon icon-photo d-lg-none"></span>
-                             Медиа контент
+                         <a class="top-menu__link" href="{{ route('favourite') }}">
+                             Избранное
                          </a>
                      </li>
                  </ul>
